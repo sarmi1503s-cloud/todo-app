@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #f5a7c7, #a8d8ea, #ffffd2);
+  background: linear-gradient(90deg, #f5a7c7, #a8d8ea, #ffffd2);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -50,7 +50,7 @@ input {
   border: 2px solid #f9a8d4;
   border-radius: 50px;
   font-size: 15px;
-  outline: none;
+  outline:none;
   color: #333;
 }
 
@@ -130,7 +130,7 @@ li.done span.task-text {
 .task-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
 }
 
 .task-text {
@@ -193,13 +193,28 @@ li.done span.task-text {
 }
 .reminder {
   display: none;
+  position:relative;
   background: linear-gradient(135deg, #fda4af, #fb7185);
   color: white;
-  padding: 12px 16px;
+  padding: 12px 40px 12px 16px;
   border-radius: 12px;
   margin-bottom: 16px;
   font-size: 14px;
   font-weight: 700;
   text-align: center;
   animation: popIn 0.3s ease;
+}
+
+
+.close-reminder {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
 }

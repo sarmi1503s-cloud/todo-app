@@ -86,7 +86,7 @@ function saveTasks() {
 function loadTasks() {
   const saved = JSON.parse(localStorage.getItem('tasks')) || [];
   const today = new Date().toDateString();
-
+  let carriedForward = false;
   // separate today's tasks from old tasks
   const updatedTasks = [];
 
@@ -97,6 +97,7 @@ function loadTasks() {
     } else {
       // yesterday's tasks
       if (!task.done) {
+        carriedForward = true;
         // incomplete — carry forward to today with new date
         const now = new Date();
         const newDateStr = now.toLocaleString('en-IN', {
@@ -123,7 +124,12 @@ function loadTasks() {
   updatedTasks.forEach(task => createTaskElement(task.text, task.done, task.date, task.dateKey));
   updateCounter();
   checkCelebration();
-  checkReminder();
+  const reminder = document.getElementById('reminder');
+  if (carriedForward) {
+    reminder.style.display = 'block';
+  } else {
+    reminder.style.display = 'none';
+  }
 }
 
 function updateCounter() {
@@ -173,17 +179,6 @@ function checkCelebration() {
     celebration.style.display = 'none';
   }
 }
-function checkReminder() {
-  const saved = JSON.parse(localStorage.getItem('tasks')) || [];
-  const today = new Date().toDateString();
-  const reminder = document.getElementById('reminder');
-const hasIncomplete = saved.some(task => {
-    return task.dateKey !== today && !task.done;
-  });
-
-  if (hasIncomplete) {
-    reminder.style.display = 'block';
-  } else {
-    reminder.style.display = 'none';
-  }
+function closeReminder() {
+  document.getElementById('reminder').style.display = 'none';
 }
